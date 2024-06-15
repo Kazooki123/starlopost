@@ -1,7 +1,22 @@
 # StarloPost
 
+A Thread like website/app to make you feel like home!
+
 ## What is it?
 
-Kind of like Facebook Threads but with more features!
+Kind of like Facebook Threads but with stylings!
 
-**Thanks for JavaScript Mastery for the source codes!**
+## What Updates to add?
+
+A lot! Like:
+
+* Media posting
+* Shorts
+* Reporting system
+* Group chats
+* Video Calling
+* Video-only section page
+* Livestreaming
+* Support Page
+
+**Thanks to JavaScript Mastery for the source codes!**
