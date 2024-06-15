@@ -1,5 +1,7 @@
 # StarloPost
 
+[![logo](public/starlopost.png)](https://starlopost.vercel.app)
+
 A Thread like website/app to make you feel like home!
 
 ## What is it?
