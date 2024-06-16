@@ -26,6 +26,7 @@ interface Props {
     };
   }[];
   isComment?: boolean;
+  mediaUrl?: string | null;
 }
 
 function ThreadCard({
@@ -38,6 +39,7 @@ function ThreadCard({
   createdAt,
   comments,
   isComment,
+  mediaUrl,
 }: Props) {
   return (
     <article
@@ -68,6 +70,27 @@ function ThreadCard({
             </Link>
 
             <p className='mt-2 text-small-regular text-light-2'>{content}</p>
+
+            {mediaUrl && (
+              <div className="mt-3 max-w-full">
+                {mediaUrl.match(/\.(jpeg|jpg|gif|png|)$/) !== null ? (
+                  <Image 
+                    src={mediaUrl}
+                    alt="Thread media"
+                    width={300}
+                    height={300}
+                    layout="responsive"
+                    className="rounded-lg object-cover"
+                  />
+                ) : mediaUrl.match(/\.(mp4|webm)$/) !== null ? (
+                  <video 
+                    src={mediaUrl}
+                    controls
+                    className="w-full rounded-lg"
+                  />
+                ) : null}
+              </div>
+            )}
 
             <div className={`${isComment && "mb-10"} mt-5 flex flex-col gap-3`}>
               <div className='flex gap-3.5'>

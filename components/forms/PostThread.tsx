@@ -1,3 +1,5 @@
+/* eslint-disable import/no-duplicates */
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import * as z from "zod";
@@ -5,6 +7,10 @@ import { useForm } from "react-hook-form";
 import { useOrganization } from "@clerk/nextjs";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { usePathname, useRouter } from "next/navigation";
+import { useUploadThing } from '@/lib/uploadthing';
+import { useState } from 'react';
+import { useToast } from '@/components/ui/use-toast';
+import React from "react";
 
 import {
   Form,
@@ -29,6 +35,10 @@ function PostThread({ userId }: Props) {
   const pathname = usePathname();
 
   const { organization } = useOrganization();
+  const [mediaFile, setMediaFile] = useState<File | null>(null);
+  const [mediaPreview, setMediaPreview] = useState<string | null>(null);
+  const { startUpload, isUploading } = useUploadThing("imageUploader");
+  const { toast } = useToast();
 
   const form = useForm<z.infer<typeof ThreadValidation>>({
     resolver: zodResolver(ThreadValidation),
@@ -39,14 +49,58 @@ function PostThread({ userId }: Props) {
   });
 
   const onSubmit = async (values: z.infer<typeof ThreadValidation>) => {
-    await createThread({
-      text: values.thread,
-      author: userId,
-      communityId: organization ? organization.id : null,
-      path: pathname,
-    });
+    try {
+      let mediaUrl = null;
+      if (mediaFile) {
+        const uploadResult = await startUpload([mediaFile]);
+        if (uploadResult && uploadResult[0]) {
+          mediaUrl = uploadResult[0].fileUrl;
+        }
+      }
 
-    router.push("/");
+      await createThread({
+        text: values.thread,
+        author: userId,
+        communityId: organization ? organization.id : null,
+        path: pathname,
+        mediaUrl
+      });
+
+      toast({
+        title: "Success",
+        description: "Your thread has been posted!",
+      });
+
+      router.push("/");
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to post thread. Please try again.",
+        variant: "destructive",
+      });
+    }
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/jfif'];
+      if (!allowedTypes.includes(file.type)) {
+        toast({
+          title: "Error",
+          description: "File type not supported. Please use JPEG, PNG, GIF or JFIF",
+          variant: "destructive"
+        });
+        return;
+      }
+
+      setMediaFile(file);
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setMediaPreview(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
   };
 
   return (
@@ -71,8 +125,30 @@ function PostThread({ userId }: Props) {
           )}
         />
 
-        <Button type='submit' className='bg-primary-500'>
-          Post Thread
+        <div className="flex flex-col gap-3">
+          <label htmlFor="media-upload" className="cursor-pointer rounded bg-primary-500 px-4 py-2 text-center text-light-1">
+            Upload Image/Video
+          </label>
+          <input
+            id="media-upload"
+            type="file"
+            accept="image/*, video/*"
+            onChange={handleFileChange}
+            className="hidden"
+          />
+            {mediaPreview && (
+              <div className="mt-2">
+                {mediaFile?.type.startsWith('image') ? (
+                  <img src={mediaPreview} alt="Preview" className="h-auto max-w-full" />
+                ) : (
+                  <video src={mediaPreview} controls className="h-auto max-w-full" />
+                )}
+              </div>
+            )}
+        </div>
+
+        <Button type='submit' className='bg-primary-500' disabled={isUploading}>
+          {isUploading ? "Uploading..." : "Post Thread"}
         </Button>
       </form>
     </Form>

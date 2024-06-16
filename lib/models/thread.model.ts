@@ -27,6 +27,10 @@ const threadSchema = new mongoose.Schema({
       ref: "Thread",
     },
   ],
+  mediaUrl: {
+    type: String,
+    default: null,
+  },
 });
 
 const Thread = mongoose.models.Thread || mongoose.model("Thread", threadSchema);
