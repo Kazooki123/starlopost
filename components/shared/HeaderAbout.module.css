@@ -1,0 +1,12 @@
+.header {
+    display: flex;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.headerText {
+    margin-left: 1rem;
+    font-size: 2rem;
+    color: #f0f0f0;
+}
