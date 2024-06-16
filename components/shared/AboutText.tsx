@@ -8,7 +8,7 @@ export default function AboutText() {
             </section>
             <section id="features" className="mb-8">
                 {/* eslint-disable-next-line tailwindcss/no-custom-classname */}
-                <h2 className="text-2xl font-bold mb-4 text-yellow-500">Features</h2>
+                <h2 className="text-2xl mb-4 font-bold text-yellow-500">Features</h2>
                 <ul className="list-disc pl-5 text-gray-300">
                     <li>Community tab</li>
                     <li>Create Organization</li>
@@ -19,7 +19,7 @@ export default function AboutText() {
             </section>
             <section id="community" className="mb-8">
                 {/* eslint-disable-next-line tailwindcss/no-custom-classname */}
-                <h2 className="text-2xl font-bold mb-4 text-yellow-500">Community</h2>
+                <h2 className="text-2xl mb-4 font-bold text-yellow-500">Community</h2>
                 <p className="text-gray-300">We have a wholesome community, come and talk and discuss with users and groups together!</p>
             </section>
         </div>
