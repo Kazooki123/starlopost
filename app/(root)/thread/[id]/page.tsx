@@ -32,6 +32,7 @@ async function page({ params }: { params: { id: string } }) {
           community={thread.community}
           createdAt={thread.createdAt}
           comments={thread.children}
+          mediaUrl={thread.mediaUrl}
         />
       </div>
 
