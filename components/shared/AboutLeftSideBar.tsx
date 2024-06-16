@@ -1,6 +1,6 @@
-"use client";
+"use client"
 
-import styles from './AboutLeftSideBar.module.css'
+import { Button } from "@/components/ui/button" 
 
 export default function AboutLeftSideBar() {
     const sections = ['Introductions', 'Features', 'Community'];
@@ -13,15 +13,16 @@ export default function AboutLeftSideBar() {
     };
 
     return (
-        <nav className={styles.sidebar}>
+        <nav className="mb-6 w-full md:mb-0 md:mr-8 md:w-64">
             {sections.map((section) => (
-                <button
+                <Button
                     key={section}
                     onClick={() => scrollToSection(section.toLowerCase().replace(' ', '-'))}
-                    className={styles.navButton}
+                    variant="ghost"
+                    className="mb-2 w-full justify-start text-left transition-colors hover:text-yellow-500"
                 >
                     {section}
-                </button>
+                </Button>
             ))}
         </nav>
     );
