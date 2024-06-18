@@ -18,6 +18,7 @@ interface Result {
       image: string;
       id: string;
     };
+    mediaUrl?: string | null;
     community: {
       id: string;
       name: string;
@@ -76,6 +77,8 @@ async function ThreadsTab({ currentUserId, accountId, accountType }: Props) {
           }
           createdAt={thread.createdAt}
           comments={thread.children}
+          mediaUrl={thread.mediaUrl}
+          userId={thread.userId}
         />
       ))}
     </section>

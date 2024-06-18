@@ -31,6 +31,14 @@ const threadSchema = new mongoose.Schema({
     type: String,
     default: null,
   },
+  heartCount: {
+    type: Number,
+    default: 0,
+  },
+  heartedBy: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  }],
 });
 
 const Thread = mongoose.models.Thread || mongoose.model("Thread", threadSchema);

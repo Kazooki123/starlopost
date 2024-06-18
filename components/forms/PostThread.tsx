@@ -84,7 +84,7 @@ function PostThread({ userId }: Props) {
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      const allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/jfif'];
+      const allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/jfif', "video/mp4"];
       if (!allowedTypes.includes(file.type)) {
         toast({
           title: "Error",

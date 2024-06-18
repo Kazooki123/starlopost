@@ -44,6 +44,13 @@ module.exports = {
           fontWeight: "600",
         },
       ],
+      "text-sm": [
+        "14px",
+        {
+          lineHeight: "110%",
+          fontWeight: "200",
+        },
+      ],
       "heading3-bold": [
         "24px",
         {
@@ -197,6 +204,12 @@ module.exports = {
         xs: "400px",
       },
       keyframes: {
+        ping: {
+          '75%, 100%': {
+            transform: 'scale(1.2)',
+            opacity: '0',
+          },
+        },
         "accordion-down": {
           from: { height: 0 },
           to: { height: "var(--radix-accordion-content-height)" },
@@ -207,6 +220,7 @@ module.exports = {
         },
       },
       animation: {
+        'ping': 'ping 0.5s cubic-bezier(0, 0, 0.2, 1)',
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },

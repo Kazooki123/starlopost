@@ -49,11 +49,11 @@ export async function fetchPosts(pageNumber = 1, pageSize = 20) {
 }
 
 interface Params {
-  text: string,
-  author: string,
-  communityId: string | null,
-  path: string,
-  mediaUrl?: string | null,
+  text: string;
+  author: string;
+  communityId: string | null;
+  path: string;
+  mediaUrl?: string | null;
 }
 
 export async function createThread({ text, author, communityId, path, mediaUrl }: Params
@@ -88,6 +88,43 @@ export async function createThread({ text, author, communityId, path, mediaUrl }
     revalidatePath(path);
   } catch (error: any) {
     throw new Error(`Failed to create thread: ${error.message}`);
+  }
+}
+
+export async function heartThread(
+  threadId: string,
+  userId: string
+): Promise<{
+  heartCount: string;
+  isHearted: boolean;
+}> {
+  try {
+    connectToDB();
+
+    const thread = await Thread.findById(threadId);
+    const user = await User.findById(userId);
+
+    if (!thread || !user) {
+      throw new Error("Thread or user not found");
+    }
+
+    const isAlreadyHearted = thread.heartBy.includes(userId);
+
+    if (isAlreadyHearted) {
+      thread.heartCount -= 1;
+      thread.heartedBy = thread.heartBy.filter(
+        (id: { toString: () => string }) => id.toString() !== userId
+      );
+    } else {
+      thread.heartCount += 1;
+      thread.heartedBy.push(userId);
+    }
+
+    await thread.save();
+
+    return { heartCount: thread.heartCount, isHearted: !isAlreadyHearted };
+  } catch (error: any) {
+    throw new Error(`Failed to heart thread: ${error.message}`);
   }
 }
 

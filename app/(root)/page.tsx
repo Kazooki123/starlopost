@@ -44,6 +44,7 @@ async function Home({
                 createdAt={post.createdAt}
                 comments={post.children}
                 mediaUrl={post.mediaUrl}
+                userId={post.userId}
               />
             ))}
           </>
