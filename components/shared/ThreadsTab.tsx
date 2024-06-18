@@ -13,6 +13,7 @@ interface Result {
     _id: string;
     text: string;
     parentId: string | null;
+    userId: string;
     author: {
       name: string;
       image: string;
@@ -79,6 +80,7 @@ async function ThreadsTab({ currentUserId, accountId, accountType }: Props) {
           comments={thread.children}
           mediaUrl={thread.mediaUrl}
           userId={thread.userId}
+          thread
         />
       ))}
     </section>

@@ -35,6 +35,7 @@ interface Props {
   }[];
   isComment?: boolean;
   mediaUrl?: string | null;
+  thread: any;
 }
 
 function ThreadCard({
@@ -49,15 +50,16 @@ function ThreadCard({
   comments,
   isComment,
   mediaUrl,
+  thread,
 }: Props) {
-  const [isHearted, setIsHearted] = useState(heartedBy.include(currentUserId));
-  const [heartedCount, setHeartCount] = useState(heartCount);
+  const [isHearted, setIsHearted] = useState(thread.heartedBy.include(currentUserId));
+  const [heartCount, setHeartCount] = useState(thread.heartCount);
 
   const handleHeartClick = async () => {
     try {
-      const result = await heartThread(id, userId);
+      const result = await heartThread(thread.id, userId);
       setIsHearted(result.isHearted);
-      setHeartCount(result.heartedCount);
+      setHeartCount(result.heartCount);
     } catch (error) {
       console.error("Failed to heart thread:", error);
     }
@@ -139,7 +141,7 @@ function ThreadCard({
                   />
                 )}
                 <span className="text-sm ml-1 text-gray-500">
-                  {heartedCount}
+                  {heartCount}
                 </span>
                 <Link href={`/thread/${id}`}>
                   <Image
