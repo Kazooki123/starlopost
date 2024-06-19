@@ -1,6 +1,5 @@
 "use client";
 
-/* eslint-disable no-undef */
 /* eslint-disable tailwindcss/no-custom-classname */
 
 import Image from "next/image";
@@ -52,7 +51,7 @@ function ThreadCard({
   mediaUrl,
   thread,
 }: Props) {
-  const [isHearted, setIsHearted] = useState(thread.heartedBy.include(currentUserId));
+  const [isHearted, setIsHearted] = useState(thread.heartedBy.includes(currentUserId));
   const [heartCount, setHeartCount] = useState(thread.heartCount);
 
   const handleHeartClick = async () => {
