@@ -12,4 +12,4 @@ An intrusion detection system (IDS) is a software application or device that **m
 
 * Yes, you see. Not every system is perfect. So that's why we are **ALWAYS** crucial when it comes to analyzing data and patterns that might be result of a malicious attack.
 
-* To answer this, we're using C++ as a plugin trying our best as possible to secure the site.
+* To answer this, we're using Python as a plugin trying our best as possible to secure the site.
