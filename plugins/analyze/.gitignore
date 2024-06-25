@@ -1,1 +1,11 @@
-test.cpp
+*.jpg
+*.png
+*.webm
+*.jfif
+*.gif
+
+# FOR TRAINING (PLS IGNORE)
+data/
+
+# Server (Django)
+server/

@@ -4,33 +4,33 @@ Here, we are going to talk about the topics about analyzing and data analyses an
 
 ## Topics
 
-* Analyzers
-* How will C++ handle this
-* A.I
-* Images in starlopost
-* Anti-NSFW
-* Filtering
-* Image Recognition
+- Analyzers
+- How will Python handle this
+- A.I
+- Images in starlopost
+- Anti-NSFW
+- Filtering
+- Image Recognition
 
 ## Analyzers
 
 For months we are trying to implement a analyzer to our websites to analyze what users are doing to **collect** patters and use this pattern to use against **BOTS** and Attackers.
 
-We're using C++ for the job due to its performance in security and embedding such as a plugin.
+We're using Python for the job due to its performance in security and embedding such as a plugin.
 
-## How will C++ handle this?
+## How will Python handle this?
 
-C++ is a high level programming language, which is C with classes they say. Many of these softwares or tools such as: Unreal engine, MongoDB, Websites and even embedded screens on your fridge are using C++!
+> Python is a high-level, general-purpose programming language. Its design philosophy emphasizes code readability with the use of significant indentation. Python is dynamically typed and garbage-collected. It supports multiple programming paradigms, including structured, object-oriented and functional programming.
 
-Because of these we're also using C++ as a plugin for StarloPost security despite already having Clerk Auth. Codes such as:
+Because of these we're also using Python as a plugin for StarloPost security despite already having Clerk Auth. Codes such as:
 
-* Rules
-* Patterns
-* Utils
-* Cores
-* And APIs
+- Rules
+- Patterns
+- Utils
+- Cores
+- And APIs
 
-Are strengthening the security and malicious prevention of StarloPost. So that's why we pick C++ as our second language for the website itself.
+Are strengthening the security and malicious prevention of StarloPost. So that's why we pick Python as our second language for the website itself.
 
 ## Artificial Intelligence (A.I)
 
@@ -42,9 +42,9 @@ Not just images! Things like text, videos, or the users actions or the users beh
 
 For days StarloPost now image posting using [Uploadthing](https://uploadthing.com) and [MongoDB](https://www.mongodb.com/docs/) as the backend. But one issue has raised and that's NSFW filtering.
 
-How can a website _automatically_ filters out this NSFW images sent by users that violates the terms of service and policy of StarloPost? Well that's where Image recognition comes in but we'll talk about that later. We'll be using C++ w/ PyTorch API Client to achieve such a thing automatically without manual moderation.
+How can a website _automatically_ filters out this NSFW images sent by users that violates the terms of service and policy of StarloPost? Well that's where Image recognition comes in but we'll talk about that later. We'll be using Python w/ PyTorch API Client to achieve such a thing automatically without manual moderation.
 
-Additional **Note**: Media/Images are signed by "mediaUrl" by the MongoDB schema. Well then used C++ libraries to detects this and see if its SFW or NSFW.
+Additional **Note**: Media/Images are signed by "mediaUrl" by the MongoDB schema. Well then used Python libraries to detects this and see if its SFW or NSFW.
 
 ## Anti-NSFW
 
@@ -52,13 +52,13 @@ StarloPost policies and TOS states that users posts that are **FLAGGED** NSFW wi
 
 We always keep StarloPost a safe place for creators and users as well. And this includes not just images but videos as well.
 
-We'll use C++ for the _auto_ ranking as it's performance in sorting and ranking are benchmarked well.
+We'll use Python for the _auto_ ranking as it's performance in sorting and ranking are benchmarked well.
 
 ## Filtering
 
 In StarloPost, images that are being filtered are being set in the sorting algorithm depending on users behavior or topic interest.
 
-C++ can do this by the form of libraries and basic _MATH_ format for ranking and filter/sorting.
+Python can do this by the form of libraries and basic _MATH_ format for ranking and filter/sorting.
 
 ## Image Recognition
 
