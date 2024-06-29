@@ -1,8 +1,8 @@
 
-import ChatRoom from '@/components/shared/ChatRoom';
+import ChatRoomBot from '@/components/shared/ChatRoomBot';
 
 export default function Page() {
     return(
-        <ChatRoom />
+        <ChatRoomBot />
     );
 }

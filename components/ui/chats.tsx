@@ -6,10 +6,82 @@
  * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
  */
 import { Button } from "@/components/ui/button";
+import React, { useState, JSX, SVGProps } from "react";
 import { Textarea } from "@/components/ui/textarea";
-import { JSX, SVGProps } from "react";
 
 export default function Chats() {
+  const [messages, setMessages] = useState([
+    { role: 'assistant', content: "Hello! I'm an AI assistant. How can I help you today?" }
+  ]);
+  const [inputMessage, setInputMessage] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+
+  const sendMessage = async () => {
+    if (!inputMessage.trim()) return;
+
+    setIsLoading(true);
+    setMessages((prevMessages) => [
+      ...prevMessages,
+      { role: "user", content: inputMessage },
+    ]);
+    setInputMessage("");
+
+    try {
+      const response = await fetch(
+        "https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Instruct-v0.2",
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${process.env.NEXT_PUBLIC_HUGGINGFACE_TOKEN}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            inputs: inputMessage,
+          }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const result = await response.json();
+
+      let botReply;
+      if (
+        Array.isArray(result) &&
+        result[0] &&
+        typeof result[0].generated_text === "string"
+      ) {
+        botReply = result[0].generated_text.trim();
+      } else if (
+        typeof result === "object" &&
+        typeof result.generated_text === "string"
+      ) {
+        botReply = result.generated_text.trim();
+      } else {
+        botReply = "I'm sorry, I couldn't generate a proper response.";
+      }
+
+      setMessages((prevMessages) => [
+        ...prevMessages,
+        { role: "assistant", content: botReply },
+      ]);
+    } catch (error) {
+      console.error("Error:", error);
+      setMessages((prevMessages) => [
+        ...prevMessages,
+        {
+          role: "assistant",
+          content:
+            "I'm sorry, there was an error processing your request. Please try again later.",
+        },
+      ]);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <div className="flex min-h-[100dvh] bg-[#1a1a1a] text-white">
       <div className="hidden md:flex flex-col items-center justify-center w-1/3 bg-[#6b3fa0] p-8">
@@ -20,39 +92,43 @@ export default function Chats() {
         <div className="max-w-2xl mx-auto h-full flex flex-col">
           <div className="flex items-center justify-between mb-4">
             <div className="text-2xl font-bold">Chatbot</div>
-            <Button
-              variant="ghost"
-              size="icon"
-              className="w-8 h-8 hover:bg-transparent text-stone-400 hover:text-stone-900"
-            >
-              <SendIcon className="w-5 h-5" />
-              <span className="sr-only">Send</span>
-            </Button>
           </div>
           <div className="flex-1 overflow-auto">
             <div className="grid gap-4">
-              <div className="flex items-start gap-4">
-                <div className="rounded-lg w-10 h-10 bg-[#6b3fa0] text-3xl flex items-center justify-center">
-                  🤖
-                </div>
-                <div className="grid gap-1 items-start text-sm">
-                  <div className="font-bold">Bot</div>
-                  <div>
-                    <p>Hello! Im an AI assistant. How can I help you today?</p>
+              {messages.map((message, index) => (
+                <div key={index} className="flex items-start gap-4">
+                  <div className="rounded-lg w-10 h-10 bg-[#6b3fa0] text-3xl flex items-center justify-center">
+                    {message.role === 'assistant' ? '🤖' : '👤'}
+                  </div>
+                  <div className="grid gap-1 items-start text-sm">
+                    <div className="font-bold">{message.role === 'assistant' ? 'Bot' : 'You'}</div>
+                    <div>
+                      <p>{message.content}</p>
+                    </div>
                   </div>
                 </div>
-              </div>
+              ))}
             </div>
           </div>
           <div className="mt-6 flex items-center">
             <Textarea
               placeholder="Type your message..."
               className="w-full rounded-md bg-[#2a2a2a] border-none focus:ring-2 focus:ring-[#6b3fa0] pr-12"
+              value={inputMessage}
+              onChange={(e) => setInputMessage(e.target.value)}
+              onKeyPress={(e) => {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                  e.preventDefault();
+                  sendMessage();
+                }
+              }}
             />
             <Button
               variant="ghost"
               size="icon"
               className="absolute w-8 h-8 right-4"
+              onClick={sendMessage}
+              disabled={isLoading}
             >
               <SendIcon className="w-5 h-5" />
               <span className="sr-only">Send</span>
