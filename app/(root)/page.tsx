@@ -45,7 +45,6 @@ async function Home({
                 comments={post.children}
                 mediaUrl={post.mediaUrl}
                 userId={post.userId}
-                thread={post.threadId}
               />
             ))}
           </>

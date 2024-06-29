@@ -34,11 +34,6 @@ interface Props {
   }[];
   isComment?: boolean;
   mediaUrl?: string | null;
-  thread: {
-    id: string;
-    heartedBy: string;
-    heartCount: string;
-  };
 }
 
 function ThreadCard({
@@ -53,21 +48,7 @@ function ThreadCard({
   comments,
   isComment,
   mediaUrl,
-  thread,
 }: Props) {
-  const [isHearted, setIsHearted] = useState(thread.heartedBy.includes(currentUserId));
-  const [heartCount, setHeartCount] = useState(thread.heartCount);
-
-  const handleHeartClick = async () => {
-    try {
-      const result = await heartThread(thread.id, userId);
-      setIsHearted(result.isHearted);
-      setHeartCount(result.heartCount);
-    } catch (error) {
-      console.error("Failed to heart thread:", error);
-    }
-  };
-
   return (
     <article
       className={`flex w-full flex-col rounded-xl ${
@@ -120,32 +101,14 @@ function ThreadCard({
             )}
 
             <div className={`${isComment && "mb-10"} mt-5 flex flex-col gap-3`}>
-              <div onClick={handleHeartClick} className="flex gap-3.5">
+              <div className="flex gap-3.5">
                 <Image
-                  src={
-                    isHearted
-                      ? "/assets/heart-filled.svg"
-                      : "/assets/heart-gray.svg"
-                  }
+                  src="/assets/heart-gray.svg"
                   alt="heart"
                   width={24}
                   height={24}
-                  className={`cursor-pointer object-contain transition-opacity duration-300 ${
-                    isHearted ? "opacity-100" : "opacity-100"
-                  }`}
+                  className="cursor-pointer object-contain transition-opacity duration-300"
                 />
-                {isHearted && (
-                  <Image
-                    src="/assets/heart-filled.svg"
-                    alt="heart-filled"
-                    width={24}
-                    height={24}
-                    className="absolute animate-ping object-contain"
-                  />
-                )}
-                <span className="text-sm ml-1 text-gray-500">
-                  {heartCount}
-                </span>
                 <Link href={`/thread/${id}`}>
                   <Image
                     src="/assets/reply.svg"
