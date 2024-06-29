@@ -9,6 +9,8 @@ import { Button } from "@/components/ui/button";
 import React, { useState, JSX, SVGProps } from "react";
 import { Textarea } from "@/components/ui/textarea";
 
+type BotReply = string | undefined;
+
 export default function Chats() {
   const [messages, setMessages] = useState([
     { role: 'assistant', content: "Hello! I'm an AI assistant. How can I help you today?" }
@@ -47,7 +49,8 @@ export default function Chats() {
 
       const result = await response.json();
 
-      let botReply;
+      let botReply: BotReply;
+
       if (
         Array.isArray(result) &&
         result[0] &&
@@ -65,7 +68,11 @@ export default function Chats() {
 
       setMessages((prevMessages) => [
         ...prevMessages,
-        { role: "assistant", content: botReply },
+        {
+          role: "assistant",
+          content:
+            botReply || "I'm sorry, I couldn't generate a proper response.",
+        },
       ]);
     } catch (error) {
       console.error("Error:", error);
