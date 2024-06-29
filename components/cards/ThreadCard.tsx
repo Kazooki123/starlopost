@@ -4,8 +4,6 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
-import { heartThread } from "@/lib/actions/thread.actions";
 
 import { formatDateString } from "@/lib/utils";
 import DeleteThread from "../forms/DeleteThread";

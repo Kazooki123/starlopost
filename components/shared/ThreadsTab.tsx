@@ -80,7 +80,6 @@ async function ThreadsTab({ currentUserId, accountId, accountType }: Props) {
           comments={thread.children}
           mediaUrl={thread.mediaUrl}
           userId={thread.userId}
-          thread
         />
       ))}
     </section>
