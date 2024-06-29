@@ -3,30 +3,31 @@
 // ChatHome.tsx
 
 import React from 'react';
-import { useRouter } from 'next/navigation';
-import Image from "next/image";
+import Link from 'next/link';
+import Image from 'next/image';
 
-const ChatHome: React.FC = () => {
-  const navigation = useRouter();
-
-  const handleChatbotClick = () => {
-    navigation.push('/chats/bot/');
-  };
-
+export default function ChatHome() {
   return (
-    <div>
-      <div onClick={handleChatbotClick} style={{ cursor: 'pointer' }}>
-        <Image
-          src='/assets/chat-bot.svg'
-          width={24}
-          height={24}
-          alt="Chatbot"
-          style={{ borderRadius: '50%', width: '50px', height: '50px' }}
-        />
-        <span className="text-gray-300">Samantha Bot</span>
+    <div className="min-h-screen bg-[#1a1a1a] text-white p-6">
+      <div className="max-w-2xl mx-auto">
+        <h1 className="text-2xl font-bold mb-6">Chat</h1>
+        <div className="bg-[#2a2a2a] rounded-lg p-4 hover:bg-[#3a3a3a] transition-colors">
+          <Link href="/chats/bot" className="flex items-center space-x-4">
+            <div className="relative w-12 h-12">
+              <Image
+                src="/assets/chat-bot.svg"
+                alt="Chatbot"
+                layout="fill"
+                className="rounded-full"
+              />
+            </div>
+            <div>
+              <h2 className="font-semibold">AI Assistant</h2>
+              <p className="text-sm text-gray-400">Chat with our AI</p>
+            </div>
+          </Link>
+        </div>
       </div>
     </div>
   );
-};
-
-export default ChatHome;
+}
