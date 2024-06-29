@@ -34,7 +34,11 @@ interface Props {
   }[];
   isComment?: boolean;
   mediaUrl?: string | null;
-  thread: any;
+  thread: {
+    id: string;
+    heartedBy: string;
+    heartCount: string;
+  };
 }
 
 function ThreadCard({

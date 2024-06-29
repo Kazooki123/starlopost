@@ -34,7 +34,7 @@ async function page({ params }: { params: { id: string } }) {
           comments={thread.children}
           mediaUrl={thread.mediaUrl}
           userId={thread.userId}
-          thread
+          thread={thread.threadId}
         />
       </div>
 
@@ -59,7 +59,7 @@ async function page({ params }: { params: { id: string } }) {
             createdAt={childItem.createdAt}
             comments={childItem.children}
             userId={childItem.userId}
-            thread
+            thread={childItem.threadId}
             isComment
           />
         ))}
