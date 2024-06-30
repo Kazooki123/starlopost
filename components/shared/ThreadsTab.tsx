@@ -2,11 +2,12 @@ import { redirect } from "next/navigation";
 import { currentUser } from "@clerk/nextjs";
 
 import { fetchCommunityPosts } from "@/lib/actions/community.actions";
-import { fetchUserPosts } from "@/lib/actions/user.actions";
+import { fetchUserPosts, fetchUser } from "@/lib/actions/user.actions";
 import { fetchThreadById } from "@/lib/actions/thread.actions";
 
 import ThreadCard from "../cards/ThreadCard";
 import { checkThread } from "@/lib/detect";
+
 interface Result {
   name: string;
   image: string;
@@ -50,6 +51,9 @@ async function ThreadsTab({ currentUserId, accountId, accountType, params }: Pro
 
   const user = await currentUser();
   if (!user) return null;
+
+  const userInfo = await fetchUser(user.id);
+  if (!userInfo?.onboarded) redirect("/onboarding");
 
   if (accountType === "Community") {
     result = await fetchCommunityPosts(accountId);
