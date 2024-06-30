@@ -6,7 +6,7 @@
  * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
  */
 import { Button } from "@/components/ui/button";
-import React, { useState, JSX, SVGProps } from "react";
+import React, { useState, JSX, SVGProps, useRef } from "react";
 import { Textarea } from "@/components/ui/textarea";
 
 type BotReply = string | undefined;
@@ -17,11 +17,24 @@ export default function Chats() {
   ]);
   const [inputMessage, setInputMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [cooldown, setCooldown] = useState(false);
+  const lastMessageTime = useRef(Date.now());
 
   const sendMessage = async () => {
     if (!inputMessage.trim()) return;
 
+    const now = Date.now();
+    const timeSinceLastMessage = now - lastMessageTime.current;
+
+    if (timeSinceLastMessage < 2000) {
+      // 2 seconds cooldown
+      setCooldown(true);
+      setTimeout(() => setCooldown(false), 2000 - timeSinceLastMessage);
+      return;
+    }
+
     setIsLoading(true);
+    lastMessageTime.current = now;
     setMessages((prevMessages) => [
       ...prevMessages,
       { role: "user", content: inputMessage },
@@ -105,10 +118,12 @@ export default function Chats() {
               {messages.map((message, index) => (
                 <div key={index} className="flex items-start gap-4">
                   <div className="rounded-lg w-10 h-10 bg-[#6b3fa0] text-3xl flex items-center justify-center">
-                    {message.role === 'assistant' ? '🤖' : '👤'}
+                    {message.role === "assistant" ? "🤖" : "👤"}
                   </div>
                   <div className="grid gap-1 items-start text-sm">
-                    <div className="font-bold">{message.role === 'assistant' ? 'Bot' : 'You'}</div>
+                    <div className="font-bold">
+                      {message.role === "assistant" ? "Bot" : "You"}
+                    </div>
                     <div>
                       <p>{message.content}</p>
                     </div>
@@ -124,7 +139,7 @@ export default function Chats() {
               value={inputMessage}
               onChange={(e) => setInputMessage(e.target.value)}
               onKeyPress={(e) => {
-                if (e.key === 'Enter' && !e.shiftKey) {
+                if (e.key === "Enter" && !e.shiftKey) {
                   e.preventDefault();
                   sendMessage();
                 }
@@ -141,6 +156,12 @@ export default function Chats() {
               <span className="sr-only">Send</span>
             </Button>
           </div>
+          {cooldown && (
+            <div className="text-red-500 text-sm mt-2">
+              You are typing too fast! Please wait a moment before sending
+              another message.
+            </div>
+          )}
         </div>
       </div>
     </div>
