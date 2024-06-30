@@ -150,7 +150,7 @@ export default function Chats() {
               size="icon"
               className="absolute w-8 h-8 right-4"
               onClick={sendMessage}
-              disabled={isLoading}
+              disabled={isLoading || cooldown}
             >
               <SendIcon className="w-5 h-5" />
               <span className="sr-only">Send</span>
