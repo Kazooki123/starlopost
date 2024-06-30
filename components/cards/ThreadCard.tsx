@@ -11,6 +11,7 @@ import DeleteThread from "../forms/DeleteThread";
 interface Props {
   id: string;
   currentUserId: string;
+  isNSFW?: boolean;
   userId: string;
   parentId: string | null;
   content: string;
@@ -46,7 +47,11 @@ function ThreadCard({
   comments,
   isComment,
   mediaUrl,
+  isNSFW,
 }: Props) {
+
+  isNSFW = false;
+
   return (
     <article
       className={`flex w-full flex-col rounded-xl ${

@@ -196,7 +196,7 @@ export async function deleteThread(id: string, path: string): Promise<void> {
   }
 }
 
-export async function fetchThreadById(threadId: string) {
+export async function fetchThreadById(threadId: string, id: string) {
   connectToDB();
 
   try {
@@ -231,6 +231,11 @@ export async function fetchThreadById(threadId: string) {
         ],
       })
       .exec();
+
+    if (!thread) {
+      console.log(`Thread with id ${id} not found`);
+      return null;
+    }
 
     return thread;
   } catch (err) {

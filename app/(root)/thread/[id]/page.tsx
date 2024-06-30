@@ -6,6 +6,7 @@ import ThreadCard from "@/components/cards/ThreadCard";
 
 import { fetchUser } from "@/lib/actions/user.actions";
 import { fetchThreadById } from "@/lib/actions/thread.actions";
+import { checkThread } from '@/lib/detect';
 
 export const revalidate = 0;
 
@@ -18,7 +19,8 @@ async function page({ params }: { params: { id: string } }) {
   const userInfo = await fetchUser(user.id);
   if (!userInfo?.onboarded) redirect("/onboarding");
 
-  const thread = await fetchThreadById(params.id);
+  const thread = await fetchThreadById(params.id, user.id);
+  const isNSFW = thread && thread.mediaUrl ? await checkThread(thread) : false;
 
   return (
     <section className="relative">
@@ -34,6 +36,7 @@ async function page({ params }: { params: { id: string } }) {
           comments={thread.children}
           mediaUrl={thread.mediaUrl}
           userId={thread.userId}
+          isNSFW={isNSFW}
         />
       </div>
 
@@ -59,6 +62,7 @@ async function page({ params }: { params: { id: string } }) {
             comments={childItem.children}
             userId={childItem.userId}
             isComment
+            isNSFW={isNSFW}
           />
         ))}
       </div>
