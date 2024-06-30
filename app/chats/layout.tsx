@@ -4,6 +4,7 @@ import React from 'react'
 import { Inter } from 'next/font/google'
 import { cn } from '@/lib/utils'
 import '../globals.css'
+import { Analytics } from "@vercel/analytics/react";
 
 const fontHeading = Inter({
   subsets: ['latin'],
@@ -24,6 +25,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         className={cn("antialiased", fontHeading.variable, fontBody.variable)}
       >
         {children}
+        <Analytics />
       </body>
     </html>
   );
