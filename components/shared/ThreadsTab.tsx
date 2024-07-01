@@ -1,12 +1,9 @@
 import { redirect } from "next/navigation";
-import { currentUser } from "@clerk/nextjs";
 
 import { fetchCommunityPosts } from "@/lib/actions/community.actions";
-import { fetchUserPosts, fetchUser } from "@/lib/actions/user.actions";
-import { fetchThreadById } from "@/lib/actions/thread.actions";
+import { fetchUserPosts } from "@/lib/actions/user.actions";
 
-import ThreadCard from "../cards/ThreadCard";
-import { checkThread } from "@/lib/detect";
+import ThreadCard from "../backups/ThreadCard";
 
 interface Result {
   name: string;
@@ -41,31 +38,15 @@ interface Props {
   currentUserId: string;
   accountId: string;
   accountType: string;
-  params: {
-    id: string;
-  };
 }
 
-async function ThreadsTab({ currentUserId, accountId, accountType, params }: Props) {
+async function ThreadsTab({ currentUserId, accountId, accountType }: Props) {
   let result: Result;
-
-  const user = await currentUser();
-  if (!user) return null;
-
-  const userInfo = await fetchUser(user.id);
-  if (!userInfo?.onboarded) redirect("/onboarding");
 
   if (accountType === "Community") {
     result = await fetchCommunityPosts(accountId);
   } else {
     result = await fetchUserPosts(accountId);
-  }
-
-  const thread = await fetchThreadById(params.id, user.id);
-  const isNSFW = thread && thread.mediaUrl ? await checkThread(thread) : false;
-
-  if (!thread) {
-    return <div>Thread not found</div>;
   }
 
   if (!result) {
@@ -99,7 +80,6 @@ async function ThreadsTab({ currentUserId, accountId, accountType, params }: Pro
           comments={thread.children}
           mediaUrl={thread.mediaUrl}
           userId={thread.userId}
-          isNSFW={isNSFW}
         />
       ))}
     </section>
