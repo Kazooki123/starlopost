@@ -1,6 +1,6 @@
-import axios from 'axios';
+import axios from "axios";
 
-const HUGGINGFACE_API_URL = 'https://api-inference.huggingface.co/models/Falconsai/nsfw_image_detection';
+const HUGGINGFACE_API_URL = "https://api-inference.huggingface.co/models/Falconsai/nsfw_image_detection";
 
 interface NSFWPrediction {
     label: string;

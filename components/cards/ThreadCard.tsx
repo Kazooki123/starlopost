@@ -4,6 +4,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { useState } from 'react';
 
 import { formatDateString } from "@/lib/utils";
 import DeleteThread from "../forms/DeleteThread";
@@ -52,6 +54,8 @@ function ThreadCard({
 
   isNSFW = false;
 
+  const [isBlurred, setIsBlurred] = useState(isNSFW);
+
   return (
     <article
       className={`flex w-full flex-col rounded-xl ${
@@ -73,17 +77,21 @@ function ThreadCard({
             <div className="thread-card_bar" />
           </div>
 
-          <div className="flex w-full flex-col">
+          <div className={isNSFW ? "nsfw-thread" : "flex w-full flex-col"}>
             <Link href={`/profile/${author.id}`} className="w-fit">
               <h4 className="cursor-pointer text-base-semibold text-light-1">
                 {author.name}
               </h4>
             </Link>
+            
+            {isNSFW && (
+              <p className="font-bold text-red-500">NSFW Content</p>
+            )}
 
             <p className="mt-2 text-small-regular text-light-2">{content}</p>
 
             {mediaUrl && (
-              <div className="mt-3 max-w-full">
+              <div className={isBlurred? 'blur-lg' : "mt-3 max-w-full"}>
                 {mediaUrl.match(/\.(jpeg|jpg|gif|png|)$/) !== null ? (
                   <Image
                     src={mediaUrl}
@@ -101,6 +109,12 @@ function ThreadCard({
                   />
                 ) : null}
               </div>
+            )}
+
+            {isNSFW && (
+              <Button className="mt-2" onClick={() => setIsBlurred(!isBlurred)}>
+                {isBlurred ? 'Show Content' : 'Hide Content'}
+              </Button>
             )}
 
             <div className={`${isComment && "mb-10"} mt-5 flex flex-col gap-3`}>
