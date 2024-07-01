@@ -7,9 +7,9 @@ interface NSFWPrediction {
     score: number;
 }
 
-export async function detectNSFW(imageUrl: string): Promise<boolean> {
+export async function detectNSFW(mediaUrl: string): Promise<boolean> {
     try {
-        const imageResponse = await axios.get(imageUrl, { responseType: 'arraybuffer' });
+        const imageResponse = await axios.get(mediaUrl, { responseType: 'arraybuffer' });
         const imageData = Buffer.from(imageResponse.data, 'binary').toString('base64');
 
         const response = await axios.post(
