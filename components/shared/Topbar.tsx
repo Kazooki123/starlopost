@@ -10,6 +10,9 @@ function Topbar() {
         <Image src='/logo.svg' alt='logo' width={28} height={28} />
         <p className='text-heading3-bold text-light-1 max-xs:hidden'>StarloPost</p>
       </Link>
+      <Link href='/pay' className='flex items-center'>
+        <Image src='/assets/wallet.svg' alt='wallet' width={28} height={28} />
+      </Link>
 
       <div className='flex items-center gap-1'>
         <div className='block md:hidden'>
