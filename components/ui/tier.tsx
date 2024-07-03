@@ -14,7 +14,7 @@ export default function TierPayment() {
       <h2 className="text-2xl font-bold text-center text-white">StarloPost Premium</h2>
       <div className="grid gap-4 md:grid-cols-3">
         <div className="bg-card rounded-lg p-6 space-y-4">
-          <h3 className="text-xl font-bold">Starter</h3>
+          <h3 className="text-xl font-bold">Starter (Free)</h3>
           <p className="text-muted-foreground">
             Get started with our basic plan.
           </p>
@@ -37,7 +37,7 @@ export default function TierPayment() {
           </div>
         </div>
         <div className="bg-primary rounded-lg p-6 space-y-4 text-primary-foreground">
-          <h3 className="text-xl font-bold">Pro (Recommended)</h3>
+          <h3 className="text-xl font-bold">$5 Pro (Recommended)</h3>
           <p className="text-primary-foreground">
             Our most popular plan for growing businesses.
           </p>
@@ -62,7 +62,7 @@ export default function TierPayment() {
           </div>
         </div>
         <div className="bg-card rounded-lg p-6 space-y-4">
-          <h3 className="text-xl font-bold">Deluxe</h3>
+          <h3 className="text-xl font-bold">$15.99 Deluxe</h3>
           <p className="text-muted-foreground">
             Our premium plan for power users.
           </p>
