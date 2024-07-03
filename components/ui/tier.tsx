@@ -40,7 +40,7 @@ export default function TierPayment() {
             </Button>
           </div>
         </div>
-        <div className="bg-primary rounded-lg p-6 space-y-4 text-primary-foreground border-4 border-red-500 relative">
+        <div className="bg-primary rounded-lg p-8 space-y-6 text-primary-foreground border-4 border-red-500 relative min-h-[500px]">
           <div className="absolute top-2 right-2 bg-red-500 text-white px-2 py-1 rounded-md text-xs font-medium">
             Most Popular
           </div>
