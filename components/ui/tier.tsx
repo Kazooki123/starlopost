@@ -11,7 +11,9 @@ import { JSX, SVGProps } from "react";
 export default function TierPayment() {
   return (
     <div className="grid gap-6 w-full max-w-3xl mx-auto">
-      <h2 className="text-2xl font-bold text-center text-white">StarloPost Premium</h2>
+      <h2 className="text-2xl font-bold text-center text-white">
+        StarloPost Premium
+      </h2>
       <div className="grid gap-4 md:grid-cols-3">
         <div className="bg-card rounded-lg p-6 space-y-4">
           <h3 className="text-xl font-bold">Starter (Free)</h3>
@@ -33,10 +35,15 @@ export default function TierPayment() {
             </div>
           </div>
           <div className="flex justify-end">
-            <Button disabled size="sm">Your Current Plan</Button>
+            <Button disabled size="sm">
+              Your Current Plan
+            </Button>
           </div>
         </div>
-        <div className="bg-primary rounded-lg p-6 space-y-4 text-primary-foreground">
+        <div className="bg-primary rounded-lg p-6 space-y-4 text-primary-foreground border-4 border-red-500 relative">
+          <div className="absolute top-2 right-2 bg-red-500 text-white px-2 py-1 rounded-md text-xs font-medium">
+            Most Popular
+          </div>
           <h3 className="text-xl font-bold">$5 Pro (Recommended)</h3>
           <p className="text-primary-foreground">
             Our most popular plan for growing businesses.
