@@ -33,7 +33,7 @@ export default function TierPayment() {
             </div>
           </div>
           <div className="flex justify-end">
-            <Button size="sm">Choose Starter</Button>
+            <Button disabled size="sm">Your Current Plan</Button>
           </div>
         </div>
         <div className="bg-primary rounded-lg p-6 space-y-4 text-primary-foreground">
