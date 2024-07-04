@@ -134,9 +134,7 @@ function ThreadCard({
                     isLiked ? 'scale-125' : 'scale-100'
                   }`}
                   onClick={toggleLike}
-                />
-                </Button>
-                
+                />  
                 <Link href={`/thread/${id}`}>
                   <Image
                     src="/assets/reply.svg"
