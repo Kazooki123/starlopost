@@ -1,0 +1,17 @@
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model ProfileView {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  viewerId  String   @db.ObjectId
+  viewedId  String   @db.ObjectId
+  viewedAt  DateTime @default(now())
+
+  @@unique([viewerId, viewedId, viewedAt])
+}
