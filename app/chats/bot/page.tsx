@@ -3,6 +3,8 @@ import ChatRoomBot from '@/components/shared/ChatRoomBot';
 
 export default function Page() {
     return(
-        <ChatRoomBot />
+        <ChatRoomBot
+          author={author}
+        />
     );
 }
