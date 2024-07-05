@@ -56,6 +56,11 @@ function ThreadCard({
   isNSFW = false;
 
   const [isBlurred, setIsBlurred] = useState(isNSFW);
+  const [isLiked, setIsLiked] = useState(false);
+
+  const toggleLike = () => {
+    setIsLiked(!isLiked);
+  };
 
   return (
     <article
@@ -121,12 +126,15 @@ function ThreadCard({
             <div className={`${isComment && "mb-10"} mt-5 flex flex-col gap-3`}>
               <div className="flex gap-3.5">
                 <Image
-                  src="/assets/heart-gray.svg"
+                  src={isLiked ? "/assets/heart-filled.svg" : "/assets/heart-gray.svg"}
                   alt="heart"
                   width={24}
                   height={24}
-                  className="cursor-pointer object-contain transition-opacity duration-300"
-                />
+                  className={`cursor-pointer object-contain transition-all duration-200 ${
+                    isLiked ? 'scale-125' : 'scale-100'
+                  }`}
+                  onClick={toggleLike}
+                />  
                 <Link href={`/thread/${id}`}>
                   <Image
                     src="/assets/reply.svg"
