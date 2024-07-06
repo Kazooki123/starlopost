@@ -1,16 +1,18 @@
 import ChatRoomBot from "@/components/shared/ChatRoomBot";
 
-interface PageProp {
+interface PageProps {
   author: {
     name: string;
     image: string;
   };
 }
 
-export default function Page({ author }: PageProp) {
+function Page({ author }: PageProps) {
   return (
     <ChatRoomBot 
       author={author} 
     />
   );
 }
+
+export default Page;
