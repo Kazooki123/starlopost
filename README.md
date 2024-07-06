@@ -10,15 +10,16 @@ Kind of like Facebook Threads but with stylings!
 
 ## What Updates to add?
 
-A lot! Like:
+### A lot! Like
 
-* Media posting
-* Shorts
-* Reporting system
-* Group chats
-* Video Calling
-* Video-only section page
-* Livestreaming
-* Support Page
+- [x] Media posting
+- [x] Shorts
+- [x] Reporting system
+- [x] Group chats
+- [x] Video Calling
+- [x] Securing data and information's
+- [x] Video-only section page
+- [x] Livestreaming
+- [x] Support Page
 
 **Thanks to JavaScript Mastery for the source codes!**
