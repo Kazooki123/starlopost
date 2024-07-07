@@ -20,6 +20,7 @@
     "@nextui-org/system": "^2.2.2",
     "@nextui-org/theme": "^2.2.6",
     "@prisma/client": "^5.16.1",
+    "@prisma/extension-accelerate": "^1.1.0",
     "@radix-ui/react-label": "^2.0.2",
     "@radix-ui/react-menubar": "^1.0.3",
     "@radix-ui/react-select": "^1.2.2",
