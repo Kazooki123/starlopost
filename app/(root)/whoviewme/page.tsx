@@ -1,6 +1,8 @@
 
 export default function Page() {
     return (
-        <h1>ON Development...</h1>
+        <div className="flex text-gray-300 justify-center">
+            <h2>Currently on Development...</h2>
+        </div>
     )
 }
