@@ -1,3 +1,5 @@
+// For Drizzle ORM (If you think this is for Prisma, check prisma.ts)
+
 import { serial, text, timestamp, pgTable } from "drizzle-orm/pg-core";
 
 export const user = pgTable("user", {
