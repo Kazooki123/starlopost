@@ -1,5 +1,21 @@
 # StarloPost
 
+## Uses:
+
+![Static Badge](https://img.shields.io/badge/clerk-black?style=for-the-badge&logo=clerk&logoColor=%236C47FF)
+![Static Badge](https://img.shields.io/badge/uploadthing-black?style=for-the-badge&logo=thingiverse&logoColor=%23EE2624)
+![Static Badge](https://img.shields.io/badge/mongodb-black?style=for-the-badge&logo=mongodb&logoColor=%2347A248)
+![Static Badge](https://img.shields.io/badge/NextJS-white?style=for-the-badge&logo=nextdotjs&logoColor=%23000000)
+![Static Badge](https://img.shields.io/badge/ReactJS-black?style=for-the-badge&logo=react&logoColor=%2361DAFB)
+![Static Badge](https://img.shields.io/badge/Prisma-white?style=for-the-badge&logo=prisma&logoColor=%232D3748)
+![Static Badge](https://img.shields.io/badge/Typescript-black?style=for-the-badge&logo=typescript&logoColor=%233178C6)
+![Static Badge](https://img.shields.io/badge/Vercel-white?style=for-the-badge&logo=vercel&logoColor=%23000000)
+![Static Badge](https://img.shields.io/badge/Drizzle%20ORM-black?style=for-the-badge&logo=drizzle&logoColor=%23C5F74F)
+![Static Badge](https://img.shields.io/badge/Sentry-white?style=for-the-badge&logo=sentry&logoColor=%23362D59)
+![Static Badge](https://img.shields.io/badge/Tailwind%20CSS-black?style=for-the-badge&logo=tailwindcss&logoColor=%2306B6D4)
+![Static Badge](https://img.shields.io/badge/Huggingface-black?style=for-the-badge&logo=huggingface&logoColor=%23FFD21E)
+
+
 [![logo](public/starlopost.png)](https://starlopost.vercel.app)
 
 A Thread like website/app to make you feel like home!
