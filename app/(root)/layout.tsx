@@ -11,6 +11,7 @@ import Bottombar from "@/components/shared/Bottombar";
 import RightSidebar from "@/components/shared/RightSidebar";
 import Topbar from "@/components/shared/Topbar";
 import { Toaster } from "@/components/ui/toaster";
+import SentryFeedbackWidget from "@/components/ui/sentry-feedback-widget";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -46,6 +47,7 @@ export default function RootLayout({
           <Bottombar />
           <Toaster />
           <Analytics />
+          <SentryFeedbackWidget />
         </body>
       </html>
     </ClerkProvider>

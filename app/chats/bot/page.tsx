@@ -1,8 +1,14 @@
+import ChatRoomBot from "@/components/shared/ChatRoomBot";
 
-import ChatRoomBot from '@/components/shared/ChatRoomBot';
+export default async function Page() {
+  const author = {
+    name: "User",
+    image: "🧑🏻",
+  };
 
-export default function Page() {
-    return(
-        <ChatRoomBot />
-    );
+  return (
+    <ChatRoomBot 
+      author={author} 
+    />
+  );
 }

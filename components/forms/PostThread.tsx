@@ -37,7 +37,7 @@ function PostThread({ userId }: Props) {
   const { organization } = useOrganization();
   const [mediaFile, setMediaFile] = useState<File | null>(null);
   const [mediaPreview, setMediaPreview] = useState<string | null>(null);
-  const { startUpload, isUploading } = useUploadThing("imageUploader");
+  const { startUpload, isUploading } = useUploadThing("mediaUpload");
   const { toast } = useToast();
 
   const form = useForm<z.infer<typeof ThreadValidation>>({

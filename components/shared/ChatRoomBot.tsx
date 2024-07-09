@@ -3,14 +3,23 @@
 /* eslint-disable no-unused-vars */
 // for the group/DM feature
 
-// ChatRoom.tsx
+// ChatRoomBot.tsx
 
 import Chats from '@/components/ui/chats'
 
-function ChatRoomBot() {
+interface ChatRoomBotProps {
+  author: {
+    name: string;
+    image: string;
+  };
+}
+
+function ChatRoomBot({ author }: ChatRoomBotProps) {
   return (
-    <Chats />
-  )
+    <Chats 
+      author={author}
+    />
+  );
 }
 
 export default ChatRoomBot;

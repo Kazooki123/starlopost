@@ -11,7 +11,14 @@ import { Textarea } from "@/components/ui/textarea";
 
 type BotReply = string | undefined;
 
-export default function Chats() {
+interface ChatProp {
+  author: {
+    name: string;
+    image: string;
+  };
+}
+
+export default function Chats({ author }: ChatProp) {
   const [messages, setMessages] = useState([
     { role: 'assistant', content: "Hello! I'm an AI assistant. How can I help you today?" }
   ]);
@@ -118,11 +125,11 @@ export default function Chats() {
               {messages.map((message, index) => (
                 <div key={index} className="flex items-start gap-4">
                   <div className="rounded-lg w-10 h-10 bg-[#6b3fa0] text-3xl flex items-center justify-center">
-                    {message.role === "assistant" ? "🤖" : "👤"}
+                    {message.role === "assistant" ? "🤖" : author.image}
                   </div>
                   <div className="grid gap-1 items-start text-sm">
                     <div className="font-bold">
-                      {message.role === "assistant" ? "Bot" : "You"}
+                      {message.role === "assistant" ? "Bot" : author.name}
                     </div>
                     <div>
                       <p>{message.content}</p>

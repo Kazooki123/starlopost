@@ -48,3 +48,6 @@ plugins/
 
 # test
 test/
+
+# Sentry Config File
+.env.sentry-build-plugin
