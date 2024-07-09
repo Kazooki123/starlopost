@@ -65,6 +65,7 @@
     "react-day-picker": "^8.10.1",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.45.1",
+    "recharts": "^2.12.7",
     "redis": "^4.6.15",
     "stripe": "^16.1.0",
     "svix": "^1.7.0",
