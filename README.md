@@ -46,4 +46,10 @@ Kind of like Facebook Threads but with stylings!
 - [x] Livestreaming
 - [x] Support Page
 
+## Contrubuting
+Please refer to the [Contributions Guide](CONTRIBUTING.md)
+
+## Security
+Starlopost, as a whole is always crucial when it comes to Security, please refer to the [Security Guides](SECURITY.md) for more information.
+
 **Thanks to JavaScript Mastery for the source codes!**
