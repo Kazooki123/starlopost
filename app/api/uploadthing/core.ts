@@ -2,7 +2,7 @@
 // Above resource shows how to setup uploadthing. Copy paste most of it as it is.
 // We're changing a few things in the middleware and configs of the file upload i.e., "media", "maxFileCount"
 
-import { currentUser } from "@clerk/nextjs";
+import { currentUser } from "@clerk/nextjs/server";
 import { createUploadthing, type FileRouter } from "uploadthing/next";
 
 const f = createUploadthing();
@@ -29,6 +29,16 @@ export const ourFileRouter = {
 
       console.log("file url", file.url);
     }),
+  imageUploader: f({
+    image: { maxFileSize: "4MB", maxFileCount: 1 },
+  }).onUploadComplete(async ({ file }) => {
+    console.log("file url", file.url);
+  }),
+  videoUploader: f({ video: { maxFileSize: "32MB" } }).onUploadComplete(
+    async ({ file }) => {
+      console.log("file url", file.url);
+    }
+  ),
   mediaUpload: f({
     image: { maxFileSize: "2MB", maxFileCount: 1 },
     video: { maxFileSize: "16MB", maxFileCount: 1 },
