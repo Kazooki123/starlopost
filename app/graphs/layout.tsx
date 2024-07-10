@@ -3,7 +3,7 @@
 import { Manrope } from 'next/font/google'
 import { cn } from '@/lib/utils'
 import React from 'react';
-import './style.css'
+import '../style.css'
 
 const fontHeading = Manrope({
   subsets: ['latin'],
