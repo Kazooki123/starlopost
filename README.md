@@ -1,9 +1,10 @@
 # StarloPost
 
 ## LICENSED BY
+
 ![GitHub License](https://img.shields.io/github/license/Kazooki123/starlopost?style=for-the-badge&logo=apache&logoColor=%23D9411E&color=black)
 
-## Uses:
+## Uses
 
 ![Static Badge](https://img.shields.io/badge/clerk-black?style=for-the-badge&logo=clerk&logoColor=%236C47FF)
 ![Static Badge](https://img.shields.io/badge/uploadthing-black?style=for-the-badge&logo=thingiverse&logoColor=%23EE2624)
@@ -22,7 +23,6 @@
 ![Static Badge](https://img.shields.io/badge/Javascript-black?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
 ![Static Badge](https://img.shields.io/badge/Upstash-black?style=for-the-badge&logo=upstash&logoColor=%2300E9A3)
 ![Static Badge](https://img.shields.io/badge/Redis-black?style=for-the-badge&logo=redis&logoColor=%23FF4438)
-
 
 [![logo](public/starlopost.png)](https://starlopost.vercel.app)
 
@@ -46,10 +46,12 @@ Kind of like Facebook Threads but with stylings!
 - [x] Livestreaming
 - [x] Support Page
 
-## Contrubuting
+## Contributing
+
 Please refer to the [Contributions Guide](CONTRIBUTING.md)
 
 ## Security
+
 Starlopost, as a whole is always crucial when it comes to Security, please refer to the [Security Guides](SECURITY.md) for more information.
 
 **Thanks to JavaScript Mastery for the source codes!**
