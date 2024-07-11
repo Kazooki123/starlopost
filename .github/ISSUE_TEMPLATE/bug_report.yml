@@ -1,0 +1,77 @@
+name: Bug report
+description: Report a bug in Starlopost
+title: "[BUG] "
+labels: [bug]
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report!
+
+        Please provide a detailed description of the issue. Be sure to follow the guidelines in our [CONTRIB](CONTRIBUTING.md).
+
+  - type: input
+    id: title
+    attributes:
+      label: Title
+      description: Provide a short summary of the issue.
+      placeholder: "[BUG] Something isn't working"
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: Provide a detailed description of the issue.
+      placeholder: Describe the issue in detail, including steps to reproduce, expected behavior, and any relevant logs or screenshots.
+
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: Specify the version of Starlopost, Next.js, and Node.js you are using.
+      placeholder: "Starlopost vX.X.X, Next.js vX.X.X, Node.js vX.X.X"
+
+  - type: textarea
+    id: steps-to-reproduce
+    attributes:
+      label: Steps to Reproduce
+      description: List the steps to reproduce the issue.
+      placeholder: |
+        1. Go to '...'
+        2. Click on '...'
+        3. Scroll down to '...'
+        4. See error
+
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: Expected Behavior
+      description: Describe what you expected to happen.
+      placeholder: The expected behavior should be...
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs
+      description: Include any relevant logs or error messages.
+      placeholder: |
+        ```shell
+        [paste logs here]
+        ```
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional Context
+      description: Add any other context about the problem here.
+      placeholder: Any additional information that might help us understand the issue.
+
+  - type: checkboxes
+    id: agree
+    attributes:
+      label: Agreement
+      description: Please check to confirm you have read the guidelines.
+      options:
+        - label: I have read the [Contribution Guide](CONTRIBUTING.md)
+          required: true
