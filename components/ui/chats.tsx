@@ -143,7 +143,7 @@ export default function Chats({ author }: ChatProp) {
     async function loadMessagesFromSupabase() {
       try {
         const { data, error } = await supabase
-          .from("bot_user_messages")
+          .from("bot_chat_messages")
           .select("*")
           .eq("author", author)
           .order("timestamp", { ascending: true });
