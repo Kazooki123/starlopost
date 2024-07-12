@@ -7,7 +7,7 @@
  */
 import { createClient } from '@supabase/supabase-js';
 import { Button } from "@/components/ui/button";
-import React, { useState, useEffect, JSX, SVGProps, useRef } from "react";
+import React, { useState, JSX, SVGProps, useRef } from "react";
 import { Textarea } from "@/components/ui/textarea";
 
 type BotReply = string | undefined;
@@ -32,28 +32,6 @@ export default function Chats({ author }: ChatProp) {
   const [isLoading, setIsLoading] = useState(false);
   const [cooldown, setCooldown] = useState(false);
   const lastMessageTime = useRef(Date.now());
-
-  useEffect(() => {
-    async function loadMessagesFromSupabase() {
-      try {
-        const { data, error } = await supabase
-          .from('bot_chat_messages')
-          .select('*')
-          .eq('author', author)
-          .order('timestamp', { ascending: true });
-
-        if (error) throw error;
-
-        if (data) {
-          setMessages(data.map(({ role, content }) => ({ role, content })));
-        }
-      } catch (error) {
-        console.error('Error loading messages from Supabase:', error);
-      }
-    }
-
-    loadMessagesFromSupabase();
-  }, [author]);
 
   const sendMessage = async () => {
     if (!inputMessage.trim()) return;
