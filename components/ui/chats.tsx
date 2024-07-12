@@ -143,9 +143,9 @@ export default function Chats({ author }: ChatProp) {
     async function loadMessagesFromSupabase() {
       try {
         const { data, error } = await supabase
-          .from("bot_chat_messages")
+          .from("bot_user_messages")
           .select("*")
-          .eq("author", author)
+          .eq("author", author.name)
           .order("timestamp", { ascending: true });
 
         if (error) throw error;
@@ -159,7 +159,7 @@ export default function Chats({ author }: ChatProp) {
     }
 
     loadMessagesFromSupabase();
-  }, [author]);
+  }, [author.name]);
 
   return (
     <div className="flex min-h-[100dvh] bg-[#1a1a1a] text-white">
