@@ -5,8 +5,9 @@
  * @see https://v0.dev/t/sWQuvFpTeQr
  * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
  */
+import { createClient } from '@supabase/supabase-js';
 import { Button } from "@/components/ui/button";
-import React, { useState, JSX, SVGProps, useRef } from "react";
+import React, { useState, useEffect, JSX, SVGProps, useRef } from "react";
 import { Textarea } from "@/components/ui/textarea";
 
 type BotReply = string | undefined;
@@ -18,6 +19,11 @@ interface ChatProp {
   };
 }
 
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+);
+
 export default function Chats({ author }: ChatProp) {
   const [messages, setMessages] = useState([
     { role: 'assistant', content: "Hello! I'm an AI assistant. How can I help you today?" }
@@ -26,6 +32,28 @@ export default function Chats({ author }: ChatProp) {
   const [isLoading, setIsLoading] = useState(false);
   const [cooldown, setCooldown] = useState(false);
   const lastMessageTime = useRef(Date.now());
+
+  useEffect(() => {
+    async function loadMessagesFromSupabase() {
+      try {
+        const { data, error } = await supabase
+          .from('bot_chat_messages')
+          .select('*')
+          .eq('author', author)
+          .order('timestamp', { ascending: true });
+
+        if (error) throw error;
+
+        if (data) {
+          setMessages(data.map(({ role, content }) => ({ role, content })));
+        }
+      } catch (error) {
+        console.error('Error loading messages from Supabase:', error);
+      }
+    }
+
+    loadMessagesFromSupabase();
+  }, [author]);
 
   const sendMessage = async () => {
     if (!inputMessage.trim()) return;
@@ -42,11 +70,32 @@ export default function Chats({ author }: ChatProp) {
 
     setIsLoading(true);
     lastMessageTime.current = now;
-    setMessages((prevMessages) => [
-      ...prevMessages,
-      { role: "user", content: inputMessage },
-    ]);
+    const userMessage = { role: "user", content: inputMessage };
+    setMessages((prevMessages) => [...prevMessages, userMessage]);
     setInputMessage("");
+
+    async function saveMessageToSupabase(message: {
+      role: string;
+      content: string;
+    }) {
+      try {
+        const { data, error } = await supabase.from("bot_chat_messages").insert([
+          {
+            role: message.role,
+            content: message.content,
+            author,
+            timestamp: new Date().toISOString(),
+          },
+        ]);
+
+        if (error) throw error;
+        console.log("Message saved to Supabase:", data);
+      } catch (error) {
+        console.error("Error saving message to Supabase:", error);
+      }
+    }
+
+    await saveMessageToSupabase(userMessage);
 
     try {
       const response = await fetch(
@@ -86,24 +135,27 @@ export default function Chats({ author }: ChatProp) {
         botReply = "I'm sorry, I couldn't generate a proper response.";
       }
 
-      setMessages((prevMessages) => [
-        ...prevMessages,
-        {
-          role: "assistant",
-          content:
-            botReply || "I'm sorry, I couldn't generate a proper response.",
-        },
-      ]);
+      const assistantMessage = {
+        role: "assistant",
+        content:
+          botReply || "I'm sorry, I couldn't generate a proper response.",
+      };
+      setMessages((prevMessages) => [...prevMessages, assistantMessage]);
+
+      // Save assistant message to Supabase
+      await saveMessageToSupabase(assistantMessage);
+
     } catch (error) {
       console.error("Error:", error);
-      setMessages((prevMessages) => [
-        ...prevMessages,
-        {
-          role: "assistant",
-          content:
-            "I'm sorry, there was an error processing your request. Please try again later.",
-        },
-      ]);
+      const errorMessage = {
+        role: "assistant",
+        content:
+          "I'm sorry, there was an error processing your request. Please try again later.",
+      };
+      setMessages((prevMessages) => [...prevMessages, errorMessage]);
+
+      // Save error message to Supabase
+      await saveMessageToSupabase(errorMessage);
     } finally {
       setIsLoading(false);
     }
