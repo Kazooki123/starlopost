@@ -7,13 +7,14 @@
  */
 import { createClient } from '@supabase/supabase-js';
 import { Button } from "@/components/ui/button";
-import React, { useState, useEffect, JSX, SVGProps, useRef } from "react";
+import React, { useState, JSX, SVGProps, useRef } from "react";
 import { Textarea } from "@/components/ui/textarea";
 
 type BotReply = string | undefined;
 
 interface ChatProp {
   author: {
+    id: string;
     name: string;
     image: string;
   };
@@ -34,18 +35,20 @@ export default function Chats({ author }: ChatProp) {
   const lastMessageTime = useRef(Date.now());
 
   async function saveMessageToSupabase(message: {
-      role: string;
-      content: string;
+    role: string;
+    content: string;
   }) {
     try {
-      const { data, error } = await supabase.from("bot_chat_messages").insert([
-        {
-          role: message.role,
-          content: message.content,
-          author,
-          timestamp: new Date().toISOString(),
-        },
-      ]);
+      const { data, error } = await supabase
+        .from("bot_chat_messages")
+        .insert([
+          {
+            role: message.role,
+            content: message.content,
+            author,
+            timestamp: new Date().toISOString(),
+          },
+        ]);
 
       if (error) throw error;
       console.log("Message saved to Supabase:", data);
@@ -139,27 +142,36 @@ export default function Chats({ author }: ChatProp) {
     }
   };
 
-  useEffect(() => {
-    async function loadMessagesFromSupabase() {
-      try {
-        const { data, error } = await supabase
-          .from("bot_chat_messages")
-          .select("*")
-          .eq("author", author.name)
-          .order("timestamp", { ascending: true });
+  async function loadMessagesFromSupabase() {
+    console.log("Loading messages for author:", author);
+    try {
+      const { data, error } = await supabase
+        .from("bot_chat_messages")
+        .select("*")
+        .eq("author", author.id)
+        .order("timestamp", { ascending: true });
 
-        if (error) throw error;
+      if (error) {
+        console.error("Supabase query error:", error);
+        throw error;
+      }
 
-        if (data) {
-          setMessages(data.map(({ role, content }) => ({ role, content })));
-        }
-      } catch (error) {
-        console.error("Error loading messages from Supabase:", error);
+      console.log("Loaded messages:", data);
+      if (data && data.length > 0) {
+        setMessages(data.map(({ role, content }) => ({ role, content })));
+        console.log("Updated messages state with:", data.length, "messages");
+      } else {
+        console.log("No messages found for this author");
+      }
+    } catch (error) {
+      console.error("Error loading messages from Supabase:", error);
+      if (error instanceof Error) {
+        console.error("Error message:", error.message);
       }
     }
+  }
 
-    loadMessagesFromSupabase();
-  }, [author.name]); 
+  loadMessagesFromSupabase()
 
   return (
     <div className="flex min-h-[100dvh] bg-[#1a1a1a] text-white">
