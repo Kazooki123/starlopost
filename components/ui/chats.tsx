@@ -14,7 +14,6 @@ type BotReply = string | undefined;
 
 interface ChatProp {
   author: {
-    id: string;
     name: string;
     image: string;
   };
@@ -148,7 +147,7 @@ export default function Chats({ author }: ChatProp) {
       const { data, error } = await supabase
         .from("bot_chat_messages")
         .select("*")
-        .eq("author", author.id)
+        .eq("author", author.name)
         .order("timestamp", { ascending: true });
 
       if (error) {
