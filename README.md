@@ -23,6 +23,7 @@
 ![Static Badge](https://img.shields.io/badge/Javascript-black?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
 ![Static Badge](https://img.shields.io/badge/Upstash-black?style=for-the-badge&logo=upstash&logoColor=%2300E9A3)
 ![Static Badge](https://img.shields.io/badge/Redis-black?style=for-the-badge&logo=redis&logoColor=%23FF4438)
+![Static Badge](https://img.shields.io/badge/Supabase-black?style=for-the-badge&logo=supabase&logoColor=%233FCF8E)
 
 [![logo](public/starlopost.png)](https://starlopost.vercel.app)
 
