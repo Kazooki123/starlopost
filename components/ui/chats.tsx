@@ -159,7 +159,7 @@ export default function Chats({ author }: ChatProp) {
     }
 
     loadMessagesFromSupabase();
-  }, [author.name]);
+  }, [author.name]); 
 
   return (
     <div className="flex min-h-[100dvh] bg-[#1a1a1a] text-white">
