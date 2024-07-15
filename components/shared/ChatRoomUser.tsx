@@ -1,3 +1,5 @@
+"use client";
+
 /* eslint-disable tailwindcss/no-custom-classname */
 // components/ChatRoomUser.tsx
 
