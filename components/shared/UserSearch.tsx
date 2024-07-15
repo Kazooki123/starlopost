@@ -6,11 +6,13 @@ import { Button } from "@/components/ui/button";
 import { useDebounce } from 'use-debounce';
 import { toast } from 'react-toastify';
 import pusher from '@/lib/pusher';
-import Image from 'next/image';
+// import Image from 'next/image';
+import ChatRoomUser from './ChatRoomUser';
 
 interface User {
   _id: string;
   username: string;
+  name: string;
   image: string;
 }
 
@@ -72,23 +74,32 @@ export default function UserSearch() {
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
-        <Button className="rounded-r-md" onClick={searchUsers} disabled={isLoading}>
-          {isLoading ? 'Searching...' : 'Search'}
+        <Button
+          className="rounded-r-md"
+          onClick={searchUsers}
+          disabled={isLoading}
+        >
+          {isLoading ? "Searching..." : "Search"}
         </Button>
       </div>
       {searchResults.length > 0 && (
         <ul className="w-full">
           {searchResults.map((user) => (
-            <li key={user._id} className="flex items-center justify-between border-b p-2">
-              <div className="flex items-center">
-                <Image
-                  src={user.image}
-                  alt={user.username}
-                  className="mr-2 h-10 w-10 rounded-full"
-                />
-                <span>{user.username}</span>
-              </div>
-              <Button onClick={() => handleAddFriend(user._id)}>Add Friend</Button>
+            <li
+              key={user._id}
+              className="flex items-center justify-between border-b p-2"
+            >
+              <ChatRoomUser
+                user={{
+                  id: user._id,
+                  username: user.username,
+                  name: user.name,
+                  image: user.image,
+                }}
+              />
+              <Button onClick={() => handleAddFriend(user._id)}>
+                Add Friend
+              </Button>
             </li>
           ))}
         </ul>
