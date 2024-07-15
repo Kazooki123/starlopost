@@ -1,3 +1,4 @@
+/* eslint-disable tailwindcss/no-custom-classname */
 /* eslint-disable tailwindcss/classnames-order */
 "use client";
 
@@ -6,6 +7,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import UserSearch from './UserSearch';
 
 export default function ChatHome() {
   return (
@@ -27,6 +29,10 @@ export default function ChatHome() {
               <p className="text-sm text-gray-400">Chat with our AI</p>
             </div>
           </Link>
+        </div>
+
+        <div>
+          <UserSearch />
         </div>
       </div>
     </div>
