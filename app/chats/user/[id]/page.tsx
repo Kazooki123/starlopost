@@ -3,24 +3,28 @@
 
 import React from "react";
 import ChatRoomUser from "@/components/shared/ChatRoomUser";
+import { auth } from '@clerk/nextjs';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
 async function getChatUser(userId: string) {
-  // This is a placeholder. Replace with actual API call to get user data
   const res = await fetch(`/api/users/${userId}`);
   if (!res.ok) throw new Error("Failed to fetch user");
   return res.json();
 }
 
 async function getChatMessages(userId: string) {
-  // This is a placeholder. Replace with actual API call to get chat messages
   const res = await fetch(`/api/chats/${userId}/messages`);
   if (!res.ok) throw new Error("Failed to fetch messages");
   return res.json();
 }
 
 export default async function ChatRoom({ params }: { params: { id: string } }) {
+  const { userId } = auth();
+  if (!userId) {
+    return <div>Please sign in to view this page</div>;
+  }
+
   const user = await getChatUser(params.id);
   const messages = await getChatMessages(params.id);
 

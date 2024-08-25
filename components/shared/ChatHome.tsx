@@ -31,7 +31,7 @@ export default function ChatHome() {
           </Link>
         </div>
 
-        <div>
+        <div className="flex items-center">
           <UserSearch />
         </div>
       </div>

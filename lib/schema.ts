@@ -9,3 +9,4 @@ export const user = pgTable("user", {
   createdAt: timestamp("created_at"),
   updatedAt: timestamp("updated_at"),
 });
+ 
