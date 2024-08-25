@@ -4,6 +4,7 @@ THE GAMES THAT ARE BEING USED HERE ARE FROM THESE REPOSITORIES:
 
 1. https://github.com/KilledByAPixel/SpaceHuggers
 2. https://github.com/ericdrowell/SafeSpace
+3. https://github.com/nicklaslof/space-block-invaders
 
 SO PLEASE, THANK THEM INSTEAD
 THEY WORKED AND TRAINED HARD FOR THEIR GAME DEVELOPMENT AND THEY DESERVE
