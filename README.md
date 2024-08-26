@@ -47,6 +47,27 @@ Kind of like Facebook Threads but with stylings!
 - [x] Livestreaming
 - [x] Support Page
 
+## GAMES!
+
+We're adding mini-games to Starlopost!
+
+> But why?
+
+To entertain our users and visitors!
+
+> What are the games being added?
+
+1. Safe Space
+2. Space Block Invaders
+3. Whack-a-mole
+4. Tetris
+5. FPS game (retro)
+6. Car simulator
+
+### Note
+
+These games are still being developed using JS & HTML so be really patient when it comes to waiting this kind of releases, Thank you.
+
 ## Contributing
 
 Please refer to the [Contributions Guide](CONTRIBUTING.md)
