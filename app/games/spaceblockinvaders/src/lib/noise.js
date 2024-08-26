@@ -9,7 +9,7 @@
  * It is assumed to have a random() method.
  */
  export function SimplexNoise(r) {
-	if (r == undefined) r = Math;
+	if (r === undefined) r = Math;
   this.grad3 = [[1,1,0],[-1,1,0],[1,-1,0],[-1,-1,0], 
                                  [1,0,1],[-1,0,1],[1,0,-1],[-1,0,-1], 
                                  [0,1,1],[0,-1,1],[0,1,-1],[0,-1,-1]]; 
