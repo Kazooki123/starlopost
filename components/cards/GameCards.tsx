@@ -20,7 +20,7 @@ export default function Component() {
       id: 2,
       title: "Space Block Invaders",
       description: "Has similarity with Minecraft XD",
-      imageUrl: "/space-block-invaders.jpg?height=200&width=300",
+      imageUrl: "/spaceblockinvaders.png?height=200&width=300",
       route: "/games/spaceblockinvaders",
     },
     {
