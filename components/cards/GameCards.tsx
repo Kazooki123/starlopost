@@ -37,6 +37,13 @@ export default function Component() {
       imageUrl: "/spacehuggers.png?height=200&width=300",
       route: "/games/spacehuggers",
     },
+    {
+        id: 5,
+        title: "Snake",
+        description: "A Snake Game, get the best scores as you want!",
+        imageUrl: "/",
+        route: "/games/snake",
+    },
   ];
 
   const handleCardClick = (route: string) => {
