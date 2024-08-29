@@ -90,7 +90,6 @@ function ThreadCard({
                 <Image 
                   src="/assets/verified.svg"
                   alt="verify_icon"
-                  fill
                 />
               </h4>
             </Link>
