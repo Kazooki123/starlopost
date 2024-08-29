@@ -5,7 +5,7 @@ import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
-export default function Component() {
+export default function GameCard() {
   const router = useRouter();
 
   const cards = [
