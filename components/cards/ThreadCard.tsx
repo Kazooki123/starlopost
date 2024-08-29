@@ -87,10 +87,6 @@ function ThreadCard({
             <Link href={`/profile/${author.id}`} className="w-fit">
               <h4 className="text-base-semibold text-light-1 cursor-pointer">
                 {author.name}
-                <Image 
-                  src="/assets/verified.svg"
-                  alt="verify_icon"
-                />
               </h4>
             </Link>
             
