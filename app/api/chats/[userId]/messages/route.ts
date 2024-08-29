@@ -1,41 +1,41 @@
-// app/api/chats/[userId]/messages/route.ts
-
-import type { NextApiRequest, NextApiResponse } from 'next';
-import { getAuth } from "@clerk/nextjs/server";
+import { NextRequest, NextResponse } from "next/server";
+import { auth } from "@clerk/nextjs";
 import { connectToDB } from "@/lib/mongoose";
-import Message from '@/lib/models/message.model';
+import Message from "@/lib/models/message.model";
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  if (req.method !== 'GET') {
-    return res.status(405).json({ message: 'Method Not Allowed' });
-  }
-
+export async function GET(
+  request: NextRequest,
+  { params }: { params: { userId: string } }
+) {
   try {
-    const { userId } = getAuth(req);
+    const { userId } = auth();
     if (!userId) {
-      return res.status(401).json({ message: 'Unauthorized' });
+      return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
     }
 
     await connectToDB();
 
-    const { userId: chatPartnerId } = req.query;
+    const chatPartnerId = params.userId;
 
-    if (typeof chatPartnerId !== 'string') {
-      return res.status(400).json({ message: 'Invalid user ID' });
+    if (typeof chatPartnerId !== "string") {
+      return NextResponse.json({ message: "Invalid user ID" }, { status: 400 });
     }
 
     const messages = await Message.find({
       $or: [
         { sender: userId, recipient: chatPartnerId },
-        { sender: chatPartnerId, recipient: userId }
-      ]
+        { sender: chatPartnerId, recipient: userId },
+      ],
     })
-    .sort({ createdAt: 1 })
-    .limit(50); // Limit to last 50 messages for performance
+      .sort({ createdAt: 1 })
+      .limit(50); // Limit to last 50 messages for performance
 
-    res.status(200).json(messages);
+    return NextResponse.json(messages);
   } catch (error) {
-    console.error('Error fetching messages:', error);
-    res.status(500).json({ message: 'Internal Server Error' });
+    console.error("Error fetching messages:", error);
+    return NextResponse.json(
+      { message: "Internal Server Error" },
+      { status: 500 }
+    );
   }
 }
