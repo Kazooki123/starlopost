@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 
-export function HelloFromRust() {
+export default function HelloRust() {
     const [message, setMessage] = useState<string>('');
     const [timestamp, setTimestamp] = useState<number | null>(null);
 
