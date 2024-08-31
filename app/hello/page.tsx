@@ -1,3 +1,5 @@
+"use server";
+
 import { useState, useEffect } from 'react';
 
 export function HelloFromRust() {

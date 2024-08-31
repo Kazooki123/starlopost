@@ -1,3 +1,5 @@
+"use server"
+
 import { auth } from '@clerk/nextjs';
 import { isAdmin } from '@/lib/utils/adminCheck';
 import { redirect } from 'next/navigation';
