@@ -20,6 +20,6 @@ export default async function handler(
     res.status(200).json(JSON.parse(response));
   } catch (error) {
     // Handle errors and send a 500 status code with the error message
-    res.status(500).json({ error: error });
+    res.status(500).json({ error });
   }
 }
