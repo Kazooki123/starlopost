@@ -5,7 +5,7 @@ import {
   hello_response,
 } from "../../../lib/rust_wasm/hello_module";
 
-export default async function handler(
+export async function GET(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
