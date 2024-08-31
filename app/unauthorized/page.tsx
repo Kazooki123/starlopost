@@ -1,3 +1,4 @@
+/* eslint-disable tailwindcss/no-custom-classname */
 // unauthorized page when accessed
 
 import Link from 'next/link';
