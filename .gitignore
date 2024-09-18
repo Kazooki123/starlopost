@@ -55,3 +55,6 @@ test/
 
 # Games
 app/games/gameplay/
+
+# Fleet
+.fleet/
