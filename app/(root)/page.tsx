@@ -4,15 +4,15 @@ import { redirect } from "next/navigation";
 import ThreadCard from "@/components/backups/ThreadCard";
 import Pagination from "@/components/shared/Pagination";
 
-import { fetchPosts, fetchThreadById } from "@/lib/actions/thread.actions";
+import { fetchPosts } from "@/lib/actions/thread.actions";
 import { fetchUser } from "@/lib/actions/user.actions";
 // import { checkThread } from "@/lib/detect";
 
 async function Home({
-  searchParams, params
+  searchParams
 }: {
     searchParams: { [key: string]: string | undefined };
-    params: { id: string }
+    // params: { id: string }
 }) {
   const user = await currentUser();
   if (!user) return null;
@@ -25,7 +25,7 @@ async function Home({
     30
   );
 
-  const thread = await fetchThreadById(params.id, user.id);
+  // const thread = await fetchThreadById(params.id, user.id);
   // const isNSFW = thread && thread.mediaUrl ? await checkThread(thread) : false;
 
   return (
