@@ -37,7 +37,6 @@ interface Props {
 function ThreadCard({
   id,
   currentUserId,
-  userId,
   parentId,
   content,
   author,
