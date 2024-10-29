@@ -6,7 +6,7 @@ import ThreadCard from "@/components/backups/ThreadCard";
 
 import { fetchUser } from "@/lib/actions/user.actions";
 import { fetchThreadById } from "@/lib/actions/thread.actions";
-import { checkThread } from '@/lib/detect';
+// import { checkThread } from '@/lib/detect';
 
 export const revalidate = 0;
 
@@ -20,7 +20,7 @@ async function page({ params }: { params: { id: string } }) {
   if (!userInfo?.onboarded) redirect("/onboarding");
 
   const thread = await fetchThreadById(params.id, user.id);
-  const isNSFW = thread && thread.mediaUrl ? await checkThread(thread) : false;
+  // const isNSFW = thread && thread.mediaUrl ? await checkThread(thread) : false;
 
   return (
     <section className="relative">

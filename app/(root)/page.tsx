@@ -6,7 +6,7 @@ import Pagination from "@/components/shared/Pagination";
 
 import { fetchPosts, fetchThreadById } from "@/lib/actions/thread.actions";
 import { fetchUser } from "@/lib/actions/user.actions";
-import { checkThread } from "@/lib/detect";
+// import { checkThread } from "@/lib/detect";
 
 async function Home({
   searchParams, params
@@ -26,7 +26,7 @@ async function Home({
   );
 
   const thread = await fetchThreadById(params.id, user.id);
-  const isNSFW = thread && thread.mediaUrl ? await checkThread(thread) : false;
+  // const isNSFW = thread && thread.mediaUrl ? await checkThread(thread) : false;
 
   return (
     <>
