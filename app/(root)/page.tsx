@@ -1,7 +1,7 @@
 import { currentUser } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 
-import ThreadCard from "@/components/cards/ThreadCard";
+import ThreadCard from "@/components/backups/ThreadCard";
 import Pagination from "@/components/shared/Pagination";
 
 import { fetchPosts, fetchThreadById } from "@/lib/actions/thread.actions";
@@ -50,7 +50,6 @@ async function Home({
                 comments={post.children}
                 mediaUrl={post.mediaUrl}
                 userId={post.userId}
-                isNSFW={isNSFW}
               />
             ))}
           </>

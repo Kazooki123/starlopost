@@ -2,7 +2,7 @@ import { redirect } from "next/navigation";
 import { currentUser } from "@clerk/nextjs";
 
 import Comment from "@/components/forms/Comment";
-import ThreadCard from "@/components/cards/ThreadCard";
+import ThreadCard from "@/components/backups/ThreadCard";
 
 import { fetchUser } from "@/lib/actions/user.actions";
 import { fetchThreadById } from "@/lib/actions/thread.actions";
@@ -36,7 +36,6 @@ async function page({ params }: { params: { id: string } }) {
           comments={thread.children}
           mediaUrl={thread.mediaUrl}
           userId={thread.userId}
-          isNSFW={isNSFW}
         />
       </div>
 
@@ -62,7 +61,6 @@ async function page({ params }: { params: { id: string } }) {
             comments={childItem.children}
             userId={childItem.userId}
             isComment
-            isNSFW={isNSFW}
           />
         ))}
       </div>
