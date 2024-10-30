@@ -11,19 +11,19 @@ import { fetchUser } from "@/lib/actions/user.actions";
 const LazyThreadCard = lazy(() => import('@/components/backups/ThreadCard'));
 const LazyPagination = lazy(() => import("@/components/shared/Pagination"));
 
-export default function Home({
+async function Home({
   searchParams
 }: {
     searchParams: { [key: string]: string | undefined };
     // params: { id: string }
 }) {
-  const user = currentUser();
+  const user = await currentUser();
   if (!user) return null;
 
-  const userInfo = fetchUser(user.id);
+  const userInfo = await fetchUser(user.id);
   if (!userInfo?.onboarded) redirect("/onboarding");
 
-  const result = fetchPosts(
+  const result = await fetchPosts(
     searchParams.page ? +searchParams.page : 1,
     30
   );
@@ -75,3 +75,5 @@ export default function Home({
     </>
   );
 }
+
+export default Home;
