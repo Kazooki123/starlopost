@@ -17,13 +17,13 @@ export default function Home({
     searchParams: { [key: string]: string | undefined };
     // params: { id: string }
 }) {
-  const user = await currentUser();
+  const user = currentUser();
   if (!user) return null;
 
-  const userInfo = await fetchUser(user.id);
+  const userInfo = fetchUser(user.id);
   if (!userInfo?.onboarded) redirect("/onboarding");
 
-  const result = await fetchPosts(
+  const result = fetchPosts(
     searchParams.page ? +searchParams.page : 1,
     30
   );
