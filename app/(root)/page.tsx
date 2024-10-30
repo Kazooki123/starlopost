@@ -4,16 +4,14 @@ import { lazy, Suspense } from 'react';
 
 import { currentUser } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
-
-const LazyThreadCard = lazy(() => import('@/components/backups/ThreadCard'));
-
-const LazyPagination = lazy(() => import("@/components/shared/Pagination"));
-
 import { fetchPosts } from "@/lib/actions/thread.actions";
 import { fetchUser } from "@/lib/actions/user.actions";
 // import { checkThread } from "@/lib/detect";
 
-async function Home({
+const LazyThreadCard = lazy(() => import('@/components/backups/ThreadCard'));
+const LazyPagination = lazy(() => import("@/components/shared/Pagination"));
+
+export default function Home({
   searchParams
 }: {
     searchParams: { [key: string]: string | undefined };
@@ -77,5 +75,3 @@ async function Home({
     </>
   );
 }
-
-export default Home;
