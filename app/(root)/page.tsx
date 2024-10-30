@@ -1,8 +1,13 @@
+"use client"
+
+import { lazy, Suspense } from 'react';
+
 import { currentUser } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 
-import ThreadCard from "@/components/backups/ThreadCard";
-import Pagination from "@/components/shared/Pagination";
+const LazyThreadCard = lazy(() => import('@/components/backups/ThreadCard'));
+
+const LazyPagination = lazy(() => import("@/components/shared/Pagination"));
 
 import { fetchPosts } from "@/lib/actions/thread.actions";
 import { fetchUser } from "@/lib/actions/user.actions";
@@ -30,37 +35,45 @@ async function Home({
 
   return (
     <>
-      <h1 className='head-text text-left'>Home</h1>
+      <h1 className="head-text text-left">Home</h1>
 
-      <section className='mt-9 flex flex-col gap-10'>
+      <section className="mt-9 flex flex-col gap-10">
         {result.posts.length === 0 ? (
-          <p className='no-result'>No threads found</p>
+          <p className="no-result">No threads found</p>
         ) : (
           <>
             {result.posts.map((post) => (
-              <ThreadCard
+              <Suspense
                 key={post._id}
-                id={post._id}
-                currentUserId={user.id}
-                parentId={post.parentId}
-                content={post.text}
-                author={post.author}
-                community={post.community}
-                createdAt={post.createdAt}
-                comments={post.children}
-                mediaUrl={post.mediaUrl}
-                userId={post.userId}
-              />
+                fallback={<div>Loading thread card...</div>}
+              >
+                <LazyThreadCard
+                  id={post._id}
+                  currentUserId={user.id}
+                  parentId={post.parentId}
+                  content={post.text}
+                  author={post.author}
+                  community={post.community}
+                  createdAt={post.createdAt}
+                  comments={post.children}
+                  mediaUrl={post.mediaUrl}
+                  userId={post.userId}
+                />
+              </Suspense>
             ))}
           </>
         )}
       </section>
 
-      <Pagination
-        path='/'
-        pageNumber={searchParams?.page ? +searchParams.page : 1}
-        isNext={result.isNext}
-      />
+      <Suspense fallback={<div>Loading pagination...</div>}>
+        {result.isNext && (
+          <LazyPagination
+            path="/"
+            pageNumber={searchParams?.page ? +searchParams.page : 1}
+            isNext={result.isNext}
+          />
+        )}
+      </Suspense>
     </>
   );
 }
