@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-async-client-component */
 "use client"
 
 import { lazy, Suspense } from 'react';
